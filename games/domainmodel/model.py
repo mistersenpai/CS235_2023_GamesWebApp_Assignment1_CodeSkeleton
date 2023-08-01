@@ -11,8 +11,11 @@ class Publisher:
     @publisher_name.setter
     def publisher_name(self, new_publisher_name: str):
         # TODO
-        pass
+        if not isinstance(new_publisher_name,str):
+            self.__publisher_name == None
 
+        else:
+            pass
     def __repr__(self):
         # we use access via the property here
         return f"<Publisher {self.__publisher_name}>"
