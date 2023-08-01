@@ -2,6 +2,7 @@ import pytest
 from games.domainmodel.model import Publisher, Genre, Game, Review, User, Wishlist
 
 
+print('hello world')
 class TestArtist:
 
     def test_construction(self):
