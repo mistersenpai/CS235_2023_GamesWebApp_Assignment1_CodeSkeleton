@@ -2,11 +2,10 @@ class Publisher:
     def __init__(self, publisher_name: str):
         self.__publisher_name = None
         # TODO
-        self.publisher_name == publisher_name
+        self.__publisher_name = publisher_name
 
     @property
     def publisher_name(self) -> str:
-        self.__publisher_name == self.publisher_name
         return self.__publisher_name
 
     @publisher_name.setter
