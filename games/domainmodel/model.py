@@ -2,7 +2,14 @@ class Publisher:
     def __init__(self, publisher_name: str):
         self.__publisher_name = None
         # TODO
-        self.__publisher_name = publisher_name
+
+
+        if not isinstance(publisher_name, str) or publisher_name == "":
+            self.__publisher_name == None
+
+        else:
+            self.__publisher_name = publisher_name
+
 
     @property
     def publisher_name(self) -> str:
@@ -11,11 +18,12 @@ class Publisher:
     @publisher_name.setter
     def publisher_name(self, new_publisher_name: str):
         # TODO
-        if not isinstance(new_publisher_name,str):
-            self.__publisher_name == None
-
+        if isinstance(new_publisher_name, str) is False:
+            self.__publisher_name = None
         else:
-            pass
+            self.__publisher_name = str(new_publisher_name)
+
+
     def __repr__(self):
         # we use access via the property here
         return f"<Publisher {self.__publisher_name}>"
@@ -32,6 +40,7 @@ class Publisher:
     def __hash__(self):
         # TODO
         pass
+
 
 
 class Genre:
@@ -57,3 +66,10 @@ class Review:
 class Wishlist:
     # TODO
     pass
+
+
+publisher4 = Publisher(" Wild Rooster   ")
+print(publisher4.publisher_name)
+
+publisher4.publisher_name = "Century Game"
+print(publisher4)
