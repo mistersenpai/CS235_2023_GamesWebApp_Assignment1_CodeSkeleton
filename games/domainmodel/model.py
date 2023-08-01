@@ -8,7 +8,13 @@ class Publisher:
             self.__publisher_name == None
 
         else:
-            self.__publisher_name = publisher_name
+            formatted = publisher_name.split()
+            blank_word = ""
+            for word in formatted:
+                blank_word += word+' '
+
+
+            self.__publisher_name = blank_word[:-1]
 
 
     @property
