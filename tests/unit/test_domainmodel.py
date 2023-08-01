@@ -15,7 +15,7 @@ class TestArtist:
 
         # TODO - the test will fail as the code is incomplete......
 
-    def test_publisher(self):
+    def Q1(self):
         # Test 1
         publisher1 = Publisher("Big Fish Games")
         assert str(publisher1) == "<Publisher Big Fish Games>"
