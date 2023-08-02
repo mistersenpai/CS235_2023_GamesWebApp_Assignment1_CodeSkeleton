@@ -34,7 +34,6 @@ class Publisher:
         return hash(self.publisher_name)
 
 class Genre:
-    # TODO
     def __init__(self, genre_name: str):
         self.__genre_name = None
         self.genre_name = genre_name
