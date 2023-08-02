@@ -36,15 +36,19 @@ class Publisher:
 class Genre:
     # TODO
     def __init__(self, genre_name: str):
-        self.__genre_name = genre_name
+        self.__genre_name = None
+        self.genre_name = genre_name
 
     @property
     def genre_name(self) -> str:
         return self.__genre_name
 
     @genre_name.setter
-    def genre_name(self, new_publisher_name: str):
-        pass
+    def genre_name(self, new_genre_name: str):
+        if not isinstance(new_genre_name, str) or new_genre_name.strip() == "":
+            self.__genre_name = None
+        else:
+            self.__genre_name = new_genre_name.strip()
 
     def __repr__(self):
         # we use access via the property here
@@ -56,10 +60,15 @@ class Genre:
         return self.__genre_name == other.genre_name
 
     def __lt__(self, other):
-        pass
+        if not isinstance(other, self.__class__):
+            return False
+        # Careful with comparison of NoneTypes, they are not less than or greater than anything
+        if self.genre_name is None or other.genre_name is None:
+            return False
+        return self.genre_name < other.genre_name
 
     def __hash__(self):
-        pass
+        return hash(self.genre_name)
 
 class Game:
     # TODO
