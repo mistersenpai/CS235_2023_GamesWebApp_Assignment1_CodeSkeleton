@@ -1,21 +1,7 @@
 class Publisher:
     def __init__(self, publisher_name: str):
         self.__publisher_name = None
-        # TODO
-
-
-        if not isinstance(publisher_name, str) or publisher_name == "":
-            self.__publisher_name == None
-
-        else:
-            formatted = publisher_name.split()
-            blank_word = ""
-            for word in formatted:
-                blank_word += word+' '
-
-
-            self.__publisher_name = blank_word[:-1]
-
+        self.publisher_name = publisher_name  # Use the setter to apply the validation and assignment logic
 
     @property
     def publisher_name(self) -> str:
@@ -23,36 +9,57 @@ class Publisher:
 
     @publisher_name.setter
     def publisher_name(self, new_publisher_name: str):
-        # TODO
-        if isinstance(new_publisher_name, str) is False:
+        if not isinstance(new_publisher_name, str) or new_publisher_name.strip() == "":
             self.__publisher_name = None
         else:
-            self.__publisher_name = str(new_publisher_name)
-
+            self.__publisher_name = new_publisher_name.strip()  # Always strip whitespace
 
     def __repr__(self):
-        # we use access via the property here
-        return f"<Publisher {self.__publisher_name}>"
+        return f"<Publisher {self.publisher_name}>"
 
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
             return False
-        return self.__publisher_name == other.publisher_name
+        return self.publisher_name == other.publisher_name
 
     def __lt__(self, other):
-        # TODO
-        pass
+        if not isinstance(other, self.__class__):
+            return False
+        # Careful with comparison of NoneTypes, they are not less than or greater than anything
+        if self.publisher_name is None or other.publisher_name is None:
+            return False
+        return self.publisher_name < other.publisher_name
 
     def __hash__(self):
-        # TODO
-        pass
-
-
+        return hash(self.publisher_name)
 
 class Genre:
     # TODO
-    pass
+    def __init__(self, genre_name: str):
+        self.__genre_name = genre_name
 
+    @property
+    def genre_name(self) -> str:
+        return self.__genre_name
+
+    @genre_name.setter
+    def genre_name(self, new_publisher_name: str):
+        pass
+
+    def __repr__(self):
+        # we use access via the property here
+        return f"<Genre {self.__genre_name}>"
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__genre_name == other.genre_name
+
+    def __lt__(self, other):
+        pass
+
+    def __hash__(self):
+        pass
 
 class Game:
     # TODO
@@ -72,10 +79,3 @@ class Review:
 class Wishlist:
     # TODO
     pass
-
-
-publisher4 = Publisher(" Wild Rooster   ")
-print(publisher4.publisher_name)
-
-publisher4.publisher_name = "Century Game"
-print(publisher4)
