@@ -86,7 +86,27 @@ class Game:
 
 
         self.__genres = []
-        self.__review=[]
+        self.__review= []
+
+        '''
+        READ ONLY FUNCTIONS
+        '''
+        @property
+        def game_id(self) -> int:
+            return self.__game_id
+
+        @property
+        def genres(self) -> list:
+            return self.__genres
+
+        @property
+        def reviews(self) -> list:
+            return self.__reviews
+
+
+        """
+        READ AND WRITE FUNCTIONS
+        """
 
 
 
