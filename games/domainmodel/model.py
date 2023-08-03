@@ -106,7 +106,42 @@ class Game:
 
         """
         READ AND WRITE FUNCTIONS
+        -title
+        -price
+        -release date
+        -description
+        -publisher
+        -image url
+        -website url
         """
+
+        @property
+        def title(self) ->str:
+            pass
+
+        @property
+        def price(self) -> int or float:
+            pass
+
+        @property
+        def release_date(self) -> str:
+            pass
+
+        @property
+        def description(self) -> str:
+            pass
+
+        @property
+        def publisher(self):
+            pass
+
+        @property
+        def image_url(self) -> str:
+            pass
+
+        @property
+        def website_url(self) -> str:
+            pass
 
 
 
