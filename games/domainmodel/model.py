@@ -69,6 +69,123 @@ class Genre:
     def __hash__(self):
         return hash(self.genre_name)
 
+
+class Game:
+    def __init__(self, game_id, title):
+        self.title = title
+        self.game_id = game_id
+        self.__genres = []
+        self.__reviews = []
+
+    @property
+    def game_id(self):
+        return self.__game_id
+
+    @game_id.setter
+    def game_id(self, game_id):
+        if isinstance(game_id, int) and game_id > 0:
+            self.__game_id = game_id
+        else:
+            raise ValueError
+
+    @property
+    def title(self):
+        return self.__title
+
+    @title.setter
+    def title(self, title):
+        if isinstance(title, str) and title.strip():
+            self.__title = title.strip()
+        else:
+            self.__title = None
+
+    @property
+    def price(self) -> float or int:
+        return self.__price
+
+    @price.setter
+    def price(self, new_price: float or int):
+        if (type(new_price) in (float, int)) and new_price > 0:
+            self.__price = new_price
+        else:
+            raise ValueError
+
+    @property
+    def release_date(self) -> str:
+        return self.__release_date
+
+    @release_date.setter
+    def release_date(self, new_release_date: str):
+        date_format = "%b %d, %Y"
+        try:
+            datetime.datetime.strptime(new_release_date, date_format)
+            self.__release_date = new_release_date
+        except ValueError:
+            raise ValueError
+
+    @property
+    def description(self) -> str:
+        return self.__description
+
+    @description.setter
+    def description(self, new_description: str):
+        if type(new_description) == str and len(new_description.strip()) != 0:
+            self.__description = new_description.strip()
+        else:
+            self.__description = None
+
+    @property
+    def publisher(self):
+        return self.__publisher
+
+    @publisher.setter
+    def publisher(self, new_publisher):
+        if isinstance(new_publisher, Publisher):
+            self.__publisher = new_publisher
+        else:
+            self.__publisher = None
+
+    @property
+    def image_url(self) -> str:
+        return self.__image_url
+
+    @image_url.setter
+    def image_url(self, new_image_url: str):
+        if type(new_image_url) == str and len(new_image_url.strip()) != 0:
+            self.__image_url = new_image_url.strip()
+        else:
+            self.__image_url = None
+
+    @property
+    def website_url(self) -> str:
+        return self.__website_url
+
+    @website_url.setter
+    def website_url(self, new_website_url: str):
+        if type(new_website_url) == str and len(new_website_url.strip()) != 0:
+            self.__website_url = new_website_url.strip()
+        else:
+            self.__website_url = None
+
+    def __repr__(self):
+        return f"<Game {self.__game_id}, {self.__title}>"
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and self.__game_id == other.game_id
+
+    def __lt__(self, other):
+        return isinstance(other, self.__class__) and self.__game_id < other.game_id
+
+    def __hash__(self):
+        return hash(self.__game_id)
+
+    def add_genre(self, genre):
+        if isinstance(genre, Genre):
+            self.__genres.append(genre)
+
+    def remove_genre(self, genre):
+        if isinstance(genre, Genre) and genre in self.__genres:
+            self.__genres.remove(genre)
 class Game:
     def __init__(self,game_id,new_title):
         self.__game_id = None
