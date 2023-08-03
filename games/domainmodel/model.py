@@ -70,8 +70,98 @@ class Genre:
         return hash(self.genre_name)
 
 class Game:
-    # TODO
-    pass
+    def __init__(self,game_id,new_title):
+        self.__game_id = None
+        self.game_id = game_id
+
+        self.__title = None
+        self.title = new_title
+
+
+    ## READ ONLY FUNCTIONS
+
+    @property
+    def game_id(self) -> str:
+        return self.__game_id
+
+    @property
+    def genres(self) -> str:
+        return self.__genres
+
+    @property
+    def reviews(self) -> str:
+        return self.__reviews
+
+    ## READ AND WRITE FUNCTIONS
+
+    @property
+    def title(self) -> str:
+        return self.__title
+
+    @title.setter
+    def title(self, new_title_name: str):
+        if type(new_title_name) == str and len(new_title_name.strip()) != 0:
+            self.__title = new_title_name.strip()
+
+    def price(self):
+        pass
+
+    def release_date(self):
+        pass
+
+    def description(self):
+        pass
+
+    def publisher(self):
+        pass
+
+    def image_url(self):
+        pass
+
+    def website_url(self):
+        pass
+
+    def __repr__(self):
+        return f"<Game{self.game_id()}, {self.title}>"
+
+    def __eq__(self):
+        pass
+
+    def __lt__(self, other):
+        pass
+
+    def __hash__(self):
+        pass
+
+# class Game:
+#     def __init__(self,game_id,new_title):
+#         self.__game_id = None
+#         self.game_id = game_id
+#
+#         self.__title = None
+#         self.title = new_title
+#
+#
+#     ## READ ONLY FUNCTIONS
+#     def game_id(self) -> str:
+#         return self.__game_id
+#
+#     def genres(self):
+#         pass
+#
+#     ## READ AND WRITE FUNCTIONS
+#
+#     @property
+#     def title(self,title) -> str:
+#         self.__title = title
+#
+#     @title.setter
+#     def title(self, new_title_name: str):
+#         self.__title= new_title_name
+#
+#     def __repr__(self):
+#         return f"<Game {self.game_id}, {self.__title}>"
+
 
 
 class User:
@@ -87,3 +177,10 @@ class Review:
 class Wishlist:
     # TODO
     pass
+
+
+game1 = Game(1, "Super Soccer Blast")
+print(game1)
+
+game3 = Game(2, "Super Soccer Blast")
+print(game3)
