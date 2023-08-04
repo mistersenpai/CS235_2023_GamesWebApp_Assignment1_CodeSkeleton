@@ -88,60 +88,60 @@ class Game:
         self.__genres = []
         self.__review= []
 
-        '''
-        READ ONLY FUNCTIONS
-        '''
-        @property
-        def game_id(self) -> int:
-            return self.__game_id
-
-        @property
-        def genres(self) -> list:
-            return self.__genres
-
-        @property
-        def reviews(self) -> list:
-            return self.__reviews
 
 
-        """
-        READ AND WRITE FUNCTIONS
-        -title
-        -price
-        -release date
-        -description
-        -publisher
-        -image url
-        -website url
-        """
+    '''
+    READ ONLY FUNCTIONS
+    '''
+    @property
+    def game_id(self) -> int:
+        return self.__game_id
 
-        @property
-        def title(self) ->str:
-            pass
+    @property
+    def genres(self) -> list:
+        return self.__genres
 
-        @property
-        def price(self) -> int or float:
-            pass
+    @property
+    def reviews(self) -> list:
+        return self.__reviews
 
-        @property
-        def release_date(self) -> str:
-            pass
+    '''
+    READ AND WRITE FUNCTIONS
+    '''
 
-        @property
-        def description(self) -> str:
-            pass
+    @property
+    def title(self) ->str:
+        return self.__title
 
-        @property
-        def publisher(self):
-            pass
+    def title(self, title:str):
+        if isinstance(title, str) == True and len(title.strip()) != 0:
+            self.__title = title.strip()
+        else:
+            sel
 
-        @property
-        def image_url(self) -> str:
-            pass
+    @property
+    def price(self) -> int or float:
+        pass
 
-        @property
-        def website_url(self) -> str:
-            pass
+    @property
+    def release_date(self) -> str:
+        pass
+
+    @property
+    def description(self) -> str:
+        pass
+
+    @property
+    def publisher(self):
+        pass
+
+    @property
+    def image_url(self) -> str:
+        pass
+
+    @property
+    def website_url(self) -> str:
+        pass
 
 
 
