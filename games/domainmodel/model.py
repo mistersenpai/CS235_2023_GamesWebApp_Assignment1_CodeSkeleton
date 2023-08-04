@@ -74,7 +74,7 @@ class Genre:
 class Game:
     def __init__(self,game_id,title):
 
-        if isinstance(title, str) and len(title.strip()) < 1:
+        if isinstance(title, str) and len(title.strip()) == 1:
             self.__title = title.strip()
         else:
             self.__title = None
@@ -85,7 +85,7 @@ class Game:
             raise ValueError
 
 
-        self.__genres = []
+        self.genre_array = []
         self.__review= []
 
 
@@ -99,7 +99,7 @@ class Game:
 
     @property
     def genres(self) -> list:
-        return self.__genres
+        return self.genre_array
 
     @property
     def reviews(self) -> list:
@@ -187,6 +187,35 @@ class Game:
             self.__website_url = new_website.strip()
         else:
             self.__website_url = None
+
+    def add_genre(self, new_genre):
+        if isinstance(new_genre, Genre) ==1:
+            self.genre_array.append(new_genre)
+
+    def remove_genre(self, genre):
+        if isinstance(genre, Genre) == 1 and genre in self.genre_array:
+            self.genre_array.remove(genre)
+
+    ## MISC stuff at end
+
+    def __repr__(self):
+        return f"<Game {self.__game_id}, {self.__title}>"
+
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__game_id == other.game_id
+
+    def __lt__(self, other):
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__game_id < other.game_id
+
+    def __hash__(self):
+        return hash(self.__game_id)
+
+
+
 
 
 
