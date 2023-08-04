@@ -164,16 +164,29 @@ class Game:
     def publisher(self, new_pub):
         if isinstance(new_pub, Publisher) == True:
             self.__publisher = new_pub
-        else
+        else:
+            self.__publisher = None
 
     @property
     def image_url(self) -> str:
-        pass
+        return self.__image_url
+
+    def image_url(self, new_url: str):
+        if(isinstance(new_url, str) == True) and len(new_url.strip()) != 0:
+            self.__image_url = new_url.strip()
+        else:
+            self.__image_url = None
 
     @property
     def website_url(self) -> str:
-        pass
+        return self.__website_url
 
+    @website_url.setter
+    def website_url(self, new_website):
+        if (isinstance(new_website, str) == True) and len(new_website.strip()) != 0:
+            self.__website_url = new_website.strip()
+        else:
+            self.__website_url = None
 
 
 
