@@ -72,76 +72,62 @@ class Genre:
         return hash(self.genre_name)
 
 class Game:
-    def __init__(self,game_id,title):
-
+    def __init__(self, game_id, title):
         if isinstance(title, str) and len(title.strip()) != 0:
             self.__title = title.strip()
         else:
             self.__title = None
-
-        if game_id > 0 and type(game_id) == int:
+        if game_id > 0 and isinstance(game_id, int):
             self.__game_id = game_id
         else:
             raise ValueError
+        self.__genres = []
+        self.__reviews = []
 
-
-        self.genre_array = []
-        self.__review= []
-
-
-
-    '''
-    READ ONLY FUNCTIONS
-    '''
     @property
     def game_id(self) -> int:
         return self.__game_id
 
     @property
     def genres(self) -> list:
-        return self.genre_array
+        return self.__genres
 
     @property
     def reviews(self) -> list:
         return self.__reviews
 
-    '''
-    READ AND WRITE FUNCTIONS
-    '''
-
     @property
-    def title(self) ->str:
+    def title(self) -> str:
         return self.__title
 
     @title.setter
-    def title(self, title:str):
-        if isinstance(title, str) == True and len(title.strip()) != 0:
+    def title(self, title: str):
+        if isinstance(title, str) and len(title.strip()) != 0:
             self.__title = title.strip()
         else:
             self.__title = None
 
     @property
-    def price(self) -> int or float:
+    def price(self) -> float or int:
         return self.__price
 
     @price.setter
-    def price(self, new_price: int or float):
-        if (isinstance(new_price, str)== True or isinstance(new_price, float)== True) and new_price > 0:
+    def price(self, new_price: float or int):
+        if isinstance(new_price, (float, int)) and new_price > 0:
             self.__price = new_price
         else:
             raise ValueError
-
 
     @property
     def release_date(self) -> str:
         return self.__release_date
 
     @release_date.setter
-    def release_date(self, new_date: str):
-        formatted = "%b %d, %Y"
+    def release_date(self, new_release_date: str):
+        date_format = "%b %d, %Y"
         try:
-            datetime.datetime.strptime(new_date, formatted)
-            self.__release_date = new_date
+            datetime.datetime.strptime(new_release_date, date_format)
+            self.__release_date = new_release_date
         except ValueError:
             raise ValueError
 
@@ -150,9 +136,9 @@ class Game:
         return self.__description
 
     @description.setter
-    def description(self, new_desc):
-        if (isinstance(new_desc, str) == True) and len(new_desc.strip()) != 0:
-            self.__description = new_desc.strip()
+    def description(self, new_description: str):
+        if isinstance(new_description, str) and len(new_description.strip()) != 0:
+            self.__description = new_description.strip()
         else:
             self.__description = None
 
@@ -161,9 +147,9 @@ class Game:
         return self.__publisher
 
     @publisher.setter
-    def publisher(self, new_pub):
-        if isinstance(new_pub, Publisher) == True:
-            self.__publisher = new_pub
+    def publisher(self, new_publisher):
+        if isinstance(new_publisher, Publisher):
+            self.__publisher = new_publisher
         else:
             self.__publisher = None
 
@@ -172,9 +158,9 @@ class Game:
         return self.__image_url
 
     @image_url.setter
-    def image_url(self, new_url: str):
-        if(isinstance(new_url, str) == True) and len(new_url.strip()) != 0:
-            self.__image_url = new_url.strip()
+    def image_url(self, new_image_url: str):
+        if isinstance(new_image_url, str) and len(new_image_url.strip()) != 0:
+            self.__image_url = new_image_url.strip()
         else:
             self.__image_url = None
 
@@ -183,21 +169,19 @@ class Game:
         return self.__website_url
 
     @website_url.setter
-    def website_url(self, new_website):
-        if (isinstance(new_website, str) == True) and len(new_website.strip()) != 0:
-            self.__website_url = new_website.strip()
+    def website_url(self, new_website_url: str):
+        if isinstance(new_website_url, str) and len(new_website_url.strip()) != 0:
+            self.__website_url = new_website_url.strip()
         else:
             self.__website_url = None
 
-    def add_genre(self, new_genre):
-        if isinstance(new_genre, Genre) ==1:
-            self.genre_array.append(new_genre)
+    def add_genre(self, genre):
+        if isinstance(genre, Genre):
+            self.__genres.append(genre)
 
     def remove_genre(self, genre):
-        if isinstance(genre, Genre) == 1 and genre in self.genre_array:
-            self.genre_array.remove(genre)
-
-    ## MISC stuff at end
+        if isinstance(genre, Genre) and genre in self.__genres:
+            self.__genres.remove(genre)
 
     def __repr__(self):
         return f"<Game {self.__game_id}, {self.__title}>"
