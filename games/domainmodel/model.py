@@ -74,7 +74,7 @@ class Genre:
 class Game:
     def __init__(self,game_id,title):
 
-        if isinstance(title, str) and len(title.strip()) == 1:
+        if isinstance(title, str) and len(title.strip()) != 0:
             self.__title = title.strip()
         else:
             self.__title = None
@@ -171,6 +171,7 @@ class Game:
     def image_url(self) -> str:
         return self.__image_url
 
+    @image_url.setter
     def image_url(self, new_url: str):
         if(isinstance(new_url, str) == True) and len(new_url.strip()) != 0:
             self.__image_url = new_url.strip()
