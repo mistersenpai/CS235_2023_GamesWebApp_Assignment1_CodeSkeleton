@@ -276,29 +276,45 @@ class User:
         return hash(self.__username)
 
 
-
 class Review:
-    # TODO
-    pass
+    def __init__(self,user,game,rating,comment):
+        if isinstance(user,User) == 1:
+            self.__user = user
+        else:
+            raise ValueError
 
+        if isinstance(game,Game) == 1:
+            self.__game = game
+        else:
+            raise ValueError
+
+        if (isinstance(rating,int) == 1) and rating in [1,2,3,4,5,6]:
+            self.__rating = rating
+        else:
+            raise ValueError
+
+        if isinstance(comment,str)==1 and len(comment.strip()) != 0:
+            self.__comment = comment.strip()
+
+        else:
+            raise ValueError
+
+
+    #READ ONLY
+    @property
+    def user(self)->User:
+        return self.__user
+    @property
+    def game(self)->Game:
+        return self.__game
+
+    ##READ AND WRITE
+    @property
+    def comment(self)->str:
+        return self.__comment
 
 class Wishlist:
     # TODO
     pass
 
 
-user1 = User("Shyamli", "pw12345")
-user2 = User("asma", "pw67890")
-user3 = User("JeNNy  ", "pw87465")
-print(user1)
-print(user2)
-print(user3)
-print(user2.password)
-try:
-   user4 = User("xyz   ", "")
-except ValueError:
-   print("ValueError was raised!")
-try:
-   user4 = User("     ", "qwerty12345")
-except ValueError:
-   print("ValueError was raised!")
