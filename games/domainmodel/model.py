@@ -313,6 +313,29 @@ class Review:
     def comment(self)->str:
         return self.__comment
 
+    @comment.setter
+    def comment(self, new_comment: str):
+        if (isinstance(new_comment,str)==1) and len(new_comment.strip())!=0:
+            self.__comment = new_comment.strip()
+        else:
+            raise ValueError
+
+    @property
+    def rating(self)->int:
+        return self.__rating
+
+    @rating.setter
+    def rating(self, new_rating: int):
+        if (isinstance(new_rating,int)==1) and (new_rating in [1,2,3,4,5,6]):
+            self.__rating = new_rating
+        else:
+            raise ValueError
+
+    def __repr__(self):
+        return f"Review(User: {self.__user}, Game: {self.__game}, Rating: {self.__rating}, Comment: {self.__comment})"
+
+
+
 class Wishlist:
     # TODO
     pass
