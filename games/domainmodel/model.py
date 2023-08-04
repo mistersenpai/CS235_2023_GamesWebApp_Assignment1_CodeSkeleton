@@ -1,5 +1,6 @@
 import datetime
 
+
 class Publisher:
     def __init__(self, publisher_name: str):
         self.__publisher_name = None
@@ -34,6 +35,7 @@ class Publisher:
 
     def __hash__(self):
         return hash(self.publisher_name)
+
 
 class Genre:
     def __init__(self, genre_name: str):
@@ -70,6 +72,7 @@ class Genre:
 
     def __hash__(self):
         return hash(self.genre_name)
+
 
 class Game:
     def __init__(self, game_id, title):
@@ -200,13 +203,60 @@ class Game:
         return hash(self.__game_id)
 
 
-
-
-
-
 class User:
-    # TODO
-    pass
+    def __init__(self,username,password):
+        if isinstance(password, str) and len(password.strip_ > 6):
+            self.__password = password
+        else:
+            raise ValueError
+
+        if isinstance(username,str) and len(username.strip())!=0:
+            self.__username = username.strip()
+        else:
+            raise ValueError
+
+        self.__favorite_games = []
+        self.__reviews = []
+
+    ### READ ONLY
+
+    @property
+    def username(self) -> str:
+        return self.__username
+
+    @property
+    def password(self) -> str:
+        return self.__password
+
+    @property
+    def reviews(self)-> list:
+        return self.__reviews
+
+    ### READ AND WRITE FUNCTIONS
+
+    def add_favourite_game(self, game):
+        if isinstance(game, Game) and game not in self.__favourite_games:
+            self.__favourite_games.append(game)
+
+    def remove_favourite_game(self, game):
+        if isinstance(game, Game):
+            try:
+                self.__favourite_games.remove(game)
+            except ValueError:
+                pass  # game was not in the list
+
+    def add_review(self, review):
+        if isinstance(review, Review) and review not in self.__reviews:
+            self.__reviews.append(review)
+
+    def remove_review(self, review):
+        if isinstance(review, Review):
+            try:
+                self.__reviews.remove(review)
+            except ValueError:
+                pass  # review was not in the list
+
+
 
 
 class Review:
