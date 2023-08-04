@@ -205,7 +205,7 @@ class Game:
 
 class User:
     def __init__(self,username,password):
-        if isinstance(password, str) and len(password.strip_ > 6):
+        if isinstance(password, str) and len(password.strip()) > 6:
             self.__password = password
         else:
             raise ValueError
@@ -255,7 +255,21 @@ class User:
                 self.__reviews.remove(review)
             except ValueError:
                 pass  # review was not in the list
+    def __repr__(self):
+        return f"<User {self.__username}>"
 
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__username == other.username
+
+    def __lt__(self, other):
+        if not isinstance(other, self.__class__):
+            return False
+        return self.__username < other.username
+
+    def __hash__(self):
+        return hash(self.__username)
 
 
 
@@ -269,8 +283,18 @@ class Wishlist:
     pass
 
 
-game1 = Game(1, "Super Soccer Blast")
-print(game1)
-
-game3 = Game(2, "Super Soccer Blast")
-print(game3)
+user1 = User("Shyamli", "pw12345")
+user2 = User("asma", "pw67890")
+user3 = User("JeNNy  ", "pw87465")
+print(user1)
+print(user2)
+print(user3)
+print(user2.password)
+try:
+   user4 = User("xyz   ", "")
+except ValueError:
+   print("ValueError was raised!")
+try:
+   user4 = User("     ", "qwerty12345")
+except ValueError:
+   print("ValueError was raised!")
