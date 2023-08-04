@@ -205,17 +205,17 @@ class Game:
 
 class User:
     def __init__(self,username,password):
-        if isinstance(password, str) and len(password.strip()) > 6:
+        if isinstance(password, str) and len(password.strip()) >= 7:
             self.__password = password
         else:
             raise ValueError
 
         if isinstance(username,str) and len(username.strip())!=0:
-            self.__username = username.strip()
+            self.__username = username.strip().lower()
         else:
             raise ValueError
 
-        self.__favorite_games = []
+        self.__favourite_games = []
         self.__reviews = []
 
     ### READ ONLY
@@ -227,6 +227,10 @@ class User:
     @property
     def password(self) -> str:
         return self.__password
+
+    @property
+    def favourite_games(self) -> list:
+        return self.__favourite_games
 
     @property
     def reviews(self)-> list:
