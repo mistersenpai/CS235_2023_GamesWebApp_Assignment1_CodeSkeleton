@@ -113,27 +113,58 @@ class Game:
     def title(self) ->str:
         return self.__title
 
+    @title.setter
     def title(self, title:str):
         if isinstance(title, str) == True and len(title.strip()) != 0:
             self.__title = title.strip()
         else:
-            sel
+            self.__title = None
 
     @property
     def price(self) -> int or float:
-        pass
+        return self.__price
+
+    @price.setter
+    def price(self, new_price: int or float):
+        if (isinstance(new_price, str)== True or isinstance(new_price, float)== True) and new_price > 0:
+            self.__price = new_price
+        else:
+            raise ValueError
+
 
     @property
     def release_date(self) -> str:
-        pass
+        return self.__release_date
+
+    @release_date.setter
+    def release_date(self, new_date: str):
+        formatted = "%b %d, %Y"
+        try:
+            datetime.datetime.strptime(new_date, formatted)
+            self.__release_date = new_date
+        except ValueError:
+            raise ValueError
 
     @property
     def description(self) -> str:
-        pass
+        return self.__description
+
+    @description.setter
+    def description(self, new_desc):
+        if (isinstance(new_desc, str) == True) and len(new_desc.strip()) != 0:
+            self.__description = new_desc.strip()
+        else:
+            self.__description = None
 
     @property
     def publisher(self):
-        pass
+        return self.__publisher
+
+    @publisher.setter
+    def publisher(self, new_pub):
+        if isinstance(new_pub, Publisher) == True:
+            self.__publisher = new_pub
+        else
 
     @property
     def image_url(self) -> str:
