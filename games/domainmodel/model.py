@@ -1,4 +1,6 @@
 import datetime
+import csv
+import os
 
 
 class Publisher:
@@ -334,10 +336,106 @@ class Review:
     def __repr__(self):
         return f"Review(User: {self.__user}, Game: {self.__game}, Rating: {self.__rating}, Comment: {self.__comment})"
 
+    def __eq__(self, other):
+        if not isinstance(other, self.__class__):
+            return False
+
+        return (self.__user == other.user and self.__game == other.game and self.__comment == other.comment)
+
+
+class GameFileCSVReader:
+
+    def __init__(self, filename):
+        if (isinstance(filename, str) == 1) and len(filename.strip()) != 0:
+            self.__filename = filename
+        else:
+            return None
+        self.__dataset_of_games = []
+        self.__dataset_of_publishers = set()
+        self.__dataset_of_genres = set()
+
+    @property
+    def dataset_of_games(self) -> list:
+        return self.__dataset_of_games
+
+    @property
+    def dataset_of_publishers(self) -> set:
+        return self.__dataset_of_publishers
+
+    @property
+    def dataset_of_genres(self) -> set:
+        return self.__dataset_of_genres
+
+    def read_csv_file(self):
+        full_path = os.path.join(os.getcwd(), self.__filename)
+
+        with open(full_path, newline='') as csvfile:
+            csv_reader = csv.DictReader(csvfile)
+            for row in csv_reader:
+                # Create game object
+                game = Game(int(row["AppID"]), row["Name"])
+
+                # Create publisher object and add to set
+                publisher = Publisher(row["Publishers"])
+                self.__dataset_of_publishers.add(publisher)
+
+                # Create genre objects, add to game and genres set
+                genres = row["Genres"].split(",")
+                for genre_str in genres:
+                    genre_str = genre_str.strip()  # Remove leading and trailing spaces
+                    if genre_str:
+                        genre = Genre(genre_str)
+                        game.add_genre(genre)
+                        self.__dataset_of_genres.add(genre)
+
+                # Add game to list
+                self.__dataset_of_games.append(game)
 
 
 class Wishlist:
-    # TODO
-    pass
+    def __init__(self):
+        self.list_of_games = []
+
+    def add_game(self, game: Game):
+        if game not in self.list_of_games:
+            self.list_of_games.append(game)
+
+    def remove_game(self, game: Game):
+        if game in self.list_of_games:
+            self.list_of_games.remove(game)
 
 
+    def select_game(self, index: int):
+        if index >= 0 and index < len(self.list_of_games):
+            return self.list_of_games[index]
+        else:
+            return None
+
+    def size(self):
+        return len(self.list_of_games)
+
+    def first_game_in_list(self):
+        if self.list_of_games:
+            return self.list_of_games[0]
+        else:
+            return None
+
+    def __iter__(self):
+        self.__index = 0
+        return self
+
+    def __next__(self):
+        if self.__index < len(self.list_of_games):
+            result = self.list_of_games[self.__index]
+            self.__index += 1
+            return result
+        else:
+            raise StopIteration
+
+
+games_wishlist = Wishlist()
+print(f"Size of wishlist: {games_wishlist.size()}")
+games_wishlist.add_game(Game(10, "Domino Game"))
+games_wishlist.add_game(Game(2, "Deer Journey"))
+games_wishlist.add_game(Game(31, "Fat City"))
+print(games_wishlist.first_game_in_list())
